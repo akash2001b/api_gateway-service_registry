@@ -29,7 +29,7 @@ router.post("/register", (req, res, next) => {
     if (err) {
       res.send("could not register " + registrationInfo.apiName + "\n" + err);
     } else {
-      res.send("successfully registered" + registrationInfo.apiName);
+      res.send("successfully registered " + registrationInfo.apiName);
     }
   });
 });
