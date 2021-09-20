@@ -23,15 +23,40 @@ router.all("/:apiName/:path", (req, res, next) => {
 
 router.post("/register", (req, res, next) => {
   const registrationInfo = req.body;
-  console.log('123');
-  registry.services[registrationInfo.apiName] = { ...registrationInfo };
-  fs.writeFile("./routes/registry.json", JSON.stringify(registry), (err) => {
-    if (err) {
-      res.send("could not register " + registrationInfo.apiName + "\n" + err);
-    } else {
-      res.send("successfully registered " + registrationInfo.apiName);
-    }
-  });
+  registrationInfo.url =
+    registrationInfo.protocol +
+    "://" +
+    registrationInfo.host +
+    ":" +
+    registrationInfo.port +
+    "/";
+
+  if (apiAlreadyExists(registrationInfo)) {
+    // if api already exist
+    res.send("Configuration already exists for " + registrationInfo.url);
+  } else {
+    // console.log("123");
+
+    registry.services[registrationInfo.apiName].push({ ...registrationInfo });
+    fs.writeFile("./routes/registry.json", JSON.stringify(registry), (err) => {
+      if (err) {
+        res.send("could not register " + registrationInfo.apiName + "\n" + err);
+      } else {
+        res.send("successfully registered " + registrationInfo.apiName);
+      }
+    });
+  }
 });
+
+const apiAlreadyExists=(registrationInfo)=>{
+  let exists=false;
+  registry.services[registrationInfo.apiName].forEach(instance =>{
+    if(instance.url===registrationInfo.url){
+      exists=true;
+      return;
+    }
+  })
+  return exists;
+};
 
 module.exports = router;

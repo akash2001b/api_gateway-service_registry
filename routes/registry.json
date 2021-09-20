@@ -1,16 +1,20 @@
 {
   "services": {
-    "registrytest": {
-      "apiName": "registrytest",
-      "host": "http://localhost",
-      "port": 3001,
-      "url": "http://localhost:3001/"
-    },
-    "testapi": {
-      "apiName": "testapi",
-      "host": "http://localhost",
-      "port": 3001,
-      "url": "http://localhost:3001/"
-    }
+    "testapi": [
+      {
+        "apiName": "testapi",
+        "protocol": "http",
+        "host": "localhost",
+        "port": 3003,
+        "url": "http://localhost:3003/"
+      },
+      {
+        "apiName": "testapi",
+        "protocol": "http",
+        "host": "localhost",
+        "port": 3002,
+        "url": "http://localhost:3002/"
+      }
+    ]
   }
 }
