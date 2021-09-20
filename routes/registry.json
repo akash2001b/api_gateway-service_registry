@@ -1,20 +1,24 @@
 {
   "services": {
-    "testapi": [
-      {
-        "apiName": "testapi",
-        "protocol": "http",
-        "host": "localhost",
-        "port": 3003,
-        "url": "http://localhost:3003/"
-      },
-      {
-        "apiName": "testapi",
-        "protocol": "http",
-        "host": "localhost",
-        "port": 3002,
-        "url": "http://localhost:3002/"
-      }
-    ]
+    "testapi": {
+      "loadBalanceStrategy":"ROUND_ROBIN",
+      "index":0,
+      "instances": [
+        {
+          "apiName": "testapi",
+          "protocol": "http",
+          "host": "localhost",
+          "port": 3002,
+          "url": "http://localhost:3002/"
+        },
+        {
+          "apiName": "testapi",
+          "protocol": "http",
+          "host": "localhost",
+          "port": 3001,
+          "url": "http://localhost:3001/"
+        }
+      ]
+    }
   }
 }
