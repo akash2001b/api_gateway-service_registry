@@ -5,6 +5,12 @@ const fs = require("fs");
 const loadbalancer = require("../util/loadbalancer");
 const router = express.Router();
 
+router.post('/enable/:apiName',(req,res)=>{
+  const apiName=req.params.apiName;
+  const requestBody=req.body;
+  const instances =registry.services
+});
+
 router.all("/:apiName/:path", (req, res, next) => {
   console.log("the api name", req.params.apiName);
   const service = registry.services[req.params.apiName];
